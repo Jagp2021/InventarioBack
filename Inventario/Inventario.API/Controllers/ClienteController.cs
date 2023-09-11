@@ -1,43 +1,101 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Inventario.Core.Dtos;
+using Inventario.Core.Interfaces.Service;
+using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Inventario.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClienteController : ControllerBase
+    public class ClienteController : BaseController
     {
-        // GET: api/<ClienteController>
+        private readonly IClienteService _clienteService;
+        public ClienteController(IClienteService clienteService)
+        {
+            _clienteService = clienteService;
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Route("GetCliente")]
+        [SwaggerOperation(Summary = "Obtener Cliente")]
+        public ResponseDto GetCliente([FromQuery]ClienteDto cliente)
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                response.Data = _clienteService.GetCliente(cliente);
+            }
+            catch (Exception ex)
+            {
+                ConstruirResponseError(ex);
+            }
+            return response;
         }
 
-        // GET api/<ClienteController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet]
+        [Route("ListCliente")]
+        [SwaggerOperation(Summary = "Obtener Lista Clientes")]
+        public ResponseDto ListCliente([FromQuery] ClienteDto cliente)
         {
-            return "value";
+            try
+            {
+                response.Data = _clienteService.ListClientes(cliente);
+            }
+            catch (Exception ex)
+            {
+                ConstruirResponseError(ex);
+            }
+            return response;
         }
 
-        // POST api/<ClienteController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("SaveCliente")]
+        [SwaggerOperation(Summary = "Guardar Cliente")]
+        public ResponseDto SaveCliente([FromBody] ClienteDto cliente)
         {
+            try
+            {
+                response.Data = _clienteService.SaveCliente(cliente);
+            }
+            catch (Exception ex)
+            {
+                ConstruirResponseError(ex);
+            }
+            return response;
         }
 
-        // PUT api/<ClienteController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        [Route("UpdateCliente")]
+        [SwaggerOperation(Summary = "Actualizar Cliente")]
+        public ResponseDto UpdateCliente([FromBody] ClienteDto cliente)
         {
+            try
+            {
+                response.Data = _clienteService.UpdateCliente(cliente);
+            }
+            catch (Exception ex)
+            {
+                ConstruirResponseError(ex);
+            }
+            return response;
         }
 
-        // DELETE api/<ClienteController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpPut]
+        [Route("DeleteCliente")]
+        [SwaggerOperation(Summary = "Inactivar/Activar Cliente")]
+        public ResponseDto DeleteCliente([FromBody] ClienteDto cliente)
         {
+            try
+            {
+                response.Data = _clienteService.DeleteCliente(cliente);
+            }
+            catch (Exception ex)
+            {
+                ConstruirResponseError(ex);
+            }
+            return response;
         }
+
+
     }
 }

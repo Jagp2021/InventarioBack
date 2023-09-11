@@ -12,7 +12,7 @@
     /// <summary>
     /// Fecha: 24 de Febrero de 2023
     /// Descripción:Clase que define la inyección de dependencias de servicios
-    /// Autor: Asesoftware - Javier Gonzalez
+    /// Autor: Javier Gonzalez
     /// </summary>
     public static class ServiceCollectionExtensions
     {
@@ -20,7 +20,7 @@
         /// <summary>
         /// Fecha: 24 de Febrero de 2023
         /// Descripción: Método que define la inyección de dependencias para el arupador de repositorios
-        /// Autor: Asesoftware - Javier Gonzalez
+        /// Autor: Javier Gonzalez
         /// </summary>
         /// <param name="services"></param>
         /// <returns></returns>
@@ -33,7 +33,7 @@
         /// <summary>
         /// Fecha: 24 de Febrero de 2023
         /// Descripción: Método que define la inyección de dependencias para la conexión a base de datos
-        /// Autor: Asesoftware - Javier Gonzalez
+        /// Autor: Javier Gonzalez
         /// </summary>
         /// <param name="services"></param>
         /// <param name="configuration"></param>
@@ -49,7 +49,7 @@
         /// <summary>
         /// Fecha: 24 de Febrero de 2023
         /// Descripción: Método que define la inyección de dependencias para los servicios de Core
-        /// Autor: Asesoftware - Javier Gonzalez
+        /// Autor: Javier Gonzalez
         /// </summary>
         /// <param name="services"></param>
         /// <returns></returns>

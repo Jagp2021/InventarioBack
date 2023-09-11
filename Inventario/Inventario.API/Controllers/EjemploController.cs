@@ -10,7 +10,7 @@
     /// <summary>
     /// Fecha: 01/09/2023
     /// Descripción: Controller Ejemplo
-    /// Autor: Asesoftware - Javier Gonzalez
+    /// Autor: Javier Gonzalez
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
@@ -31,7 +31,7 @@
         /// <summary>
         /// Fecha: 01/09/2023
         /// Descripción: Descripción Endpoint Ejemplo
-        /// Autor: Asesoftware - Javier Gonzalez
+        /// Autor: Javier Gonzalez
         /// </summary>
         /// <param name="estado"></param>
         /// <returns></returns>

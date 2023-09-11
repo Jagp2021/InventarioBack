@@ -8,7 +8,7 @@
     /// <summary>
     /// Fecha: 01 de Septiembre de 2023
     /// Descripción: Clase que define los métodos del servicio base
-    /// Autor: Asesoftware - Javier Gonzalez
+    /// Autor: Javier Gonzalez
     /// </summary>
     public class BaseService
     {

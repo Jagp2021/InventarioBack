@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Inventario.Core.Dtos;
 
 namespace Inventario.Core.Interfaces.Service
 {
     public interface IProveedorService
     {
+        List<ProveedorDto> ListProveedores(ProveedorDto filtro);
+        ProveedorDto GetProveedor(ProveedorDto filtro);
+        ProveedorDto SaveProveedor(ProveedorDto proveedor);
+        ProveedorDto UpdateProveedor(ProveedorDto proveedor);
+        ProveedorDto DeleteProveedor(ProveedorDto proveedor);
     }
 }

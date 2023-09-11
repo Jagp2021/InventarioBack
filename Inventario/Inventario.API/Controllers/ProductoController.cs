@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Inventario.Core.Dtos;
+using Inventario.Core.Interfaces.Service;
+using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -6,38 +9,92 @@ namespace Inventario.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductoController : ControllerBase
+    public class ProductoController : BaseController
     {
-        // GET: api/<ProductoController>
+        private readonly IProductoService _productoService;
+        public ProductoController(IProductoService productoService)
+        {
+            _productoService = productoService;
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Route("GetProducto")]
+        [SwaggerOperation(Summary = "Obtener Producto")]
+        public ResponseDto GetProducto([FromQuery] ProductoDto producto)
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                response.Data = _productoService.GetProducto(producto);
+            }
+            catch (Exception ex)
+            {
+                ConstruirResponseError(ex);
+            }
+            return response;
         }
 
-        // GET api/<ProductoController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet]
+        [Route("ListProducto")]
+        [SwaggerOperation(Summary = "Obtener Lista Productos")]
+        public ResponseDto ListProducto([FromQuery] ProductoDto producto)
         {
-            return "value";
+            try
+            {
+                response.Data = _productoService.ListProductos(producto);
+            }
+            catch (Exception ex)
+            {
+                ConstruirResponseError(ex);
+            }
+            return response;
         }
 
-        // POST api/<ProductoController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("SaveProducto")]
+        [SwaggerOperation(Summary = "Guardar Producto")]
+        public ResponseDto SaveProducto([FromBody] ProductoDto producto)
         {
+            try
+            {
+                response.Data = _productoService.SaveProducto(producto);
+            }
+            catch (Exception ex)
+            {
+                ConstruirResponseError(ex);
+            }
+            return response;
         }
 
-        // PUT api/<ProductoController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        [Route("UpdateProducto")]
+        [SwaggerOperation(Summary = "Actualizar Producto")]
+        public ResponseDto UpdateProducto([FromBody] ProductoDto producto)
         {
+            try
+            {
+                response.Data = _productoService.UpdateProducto(producto);
+            }
+            catch (Exception ex)
+            {
+                ConstruirResponseError(ex);
+            }
+            return response;
         }
 
-        // DELETE api/<ProductoController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpPut]
+        [Route("DeleteProducto")]
+        [SwaggerOperation(Summary = "Inactivar/Activar Producto")]
+        public ResponseDto DeleteProducto([FromBody] ProductoDto producto)
         {
+            try
+            {
+                response.Data = _productoService.DeleteProducto(producto);
+            }
+            catch (Exception ex)
+            {
+                ConstruirResponseError(ex);
+            }
+            return response;
         }
     }
 }

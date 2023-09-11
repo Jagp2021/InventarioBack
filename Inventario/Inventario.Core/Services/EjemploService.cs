@@ -10,7 +10,7 @@
     /// <summary>
     /// Fecha: 01 de Septiembre de 2023
     /// Descripción: Clase que define los métodos del servicio Ejemplo
-    /// Autor: Asesoftware - Javier Gonzalez
+    /// Autor: Javier Gonzalez
     /// </summary>
     public class EjemploService : BaseService, IEjemploService
     {
@@ -24,7 +24,7 @@
         public EjemploDto MetodoEjemplo(bool estado)
         {
             var repository = UnitOfWork.EjemploRepository();
-            var result = repository.Get(e => e.Activo == estado);
+            var result = repository.Get(e => e.Estado == estado);
             return new EjemploDto();
         }
         #endregion

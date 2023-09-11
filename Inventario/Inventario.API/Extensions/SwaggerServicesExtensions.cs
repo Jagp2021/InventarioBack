@@ -7,7 +7,7 @@
     /// <summary>
     /// Fecha: 24 de Febrero de 2023
     /// Descripción: Clase que define la documentación de Swagger
-    /// Autor: Asesoftware - Javier Gonzalez
+    /// Autor: Javier Gonzalez
     /// </summary>
     public static class SwaggerServicesExtensions
     {
@@ -24,9 +24,9 @@
                 });
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "PAC.Parametrización",
+                    Title = "Inventario",
                     Version = "v1",
-                    Description = "MicroServicio Parametrización del Módulo de Programación Anual Mensualizado de Caja (PAC)"
+                    Description = "Servicios de Aplicación de Inventarios"
                 });
             });
             return services;

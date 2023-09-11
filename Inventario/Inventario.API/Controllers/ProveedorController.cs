@@ -1,83 +1,100 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Azure;
+using Inventario.Core.Dtos;
+using Inventario.Core.Interfaces.Service;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Inventario.API.Controllers
 {
-    public class ProveedorController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ProveedorController : BaseController
     {
-        // GET: ProveedorController
-        public ActionResult Index()
+        private readonly IProveedorService _proveedorService;
+
+        public ProveedorController(IProveedorService proveedorService)
         {
-            return View();
+            _proveedorService = proveedorService;
         }
 
-        // GET: ProveedorController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: ProveedorController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: ProveedorController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        [HttpGet]
+        [Route("GetProveedor")]
+        [SwaggerOperation(Summary = "Obtener Proveedor")]
+        public ResponseDto GetProveedor([FromQuery] ProveedorDto proveedor)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                response.Data = _proveedorService.GetProveedor(proveedor);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ConstruirResponseError(ex);
             }
+            return response;
         }
 
-        // GET: ProveedorController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: ProveedorController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        [HttpGet]
+        [Route("ListProveedor")]
+        [SwaggerOperation(Summary = "Obtener Lista Proveedors")]
+        public ResponseDto ListProveedor([FromQuery] ProveedorDto proveedor)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                response.Data = _proveedorService.ListProveedores(proveedor);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ConstruirResponseError(ex);
             }
+            return response;
         }
 
-        // GET: ProveedorController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: ProveedorController/Delete/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        [Route("SaveProveedor")]
+        [SwaggerOperation(Summary = "Guardar Proveedor")]
+        public ResponseDto SaveProveedor([FromBody] ProveedorDto proveedor)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                response.Data = _proveedorService.SaveProveedor(proveedor);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ConstruirResponseError(ex);
             }
+            return response;
+        }
+
+        [HttpPut]
+        [Route("UpdateProveedor")]
+        [SwaggerOperation(Summary = "Actualizar Proveedor")]
+        public ResponseDto UpdateProveedor([FromBody] ProveedorDto proveedor)
+        {
+            try
+            {
+                response.Data = _proveedorService.UpdateProveedor(proveedor);
+            }
+            catch (Exception ex)
+            {
+                ConstruirResponseError(ex);
+            }
+            return response;
+        }
+
+        [HttpPut]
+        [Route("DeleteProveedor")]
+        [SwaggerOperation(Summary = "Inactivar/Activar Proveedor")]
+        public ResponseDto DeleteProveedor([FromBody] ProveedorDto proveedor)
+        {
+            try
+            {
+                response.Data = _proveedorService.DeleteProveedor(proveedor);
+            }
+            catch (Exception ex)
+            {
+                ConstruirResponseError(ex);
+            }
+            return response;
         }
     }
 }

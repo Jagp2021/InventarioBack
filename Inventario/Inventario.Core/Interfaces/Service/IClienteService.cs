@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Inventario.Core.Dtos;
 
 namespace Inventario.Core.Interfaces.Service
 {
     public interface IClienteService
     {
+        List<ClienteDto> ListClientes(ClienteDto filtro);
+        ClienteDto GetCliente(ClienteDto filtro);
+        ClienteDto SaveCliente(ClienteDto cliente);
+        ClienteDto UpdateCliente(ClienteDto cliente);
+        ClienteDto DeleteCliente(ClienteDto cliente);
     }
 }

@@ -19,7 +19,7 @@ namespace Inventario.Infrastructure.Repositories
         /// <summary>
         /// Fecha: 24 de Febrero de 2023
         /// Descripción: Método que define la acción de guardado sobre una entidad
-        /// Autor: Asesoftware - Javier Gonzalez
+        /// Autor: Javier Gonzalez
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
@@ -32,7 +32,7 @@ namespace Inventario.Infrastructure.Repositories
         /// <summary>
         /// Fecha: 24 de Febrero de 2023
         /// Descripción: Método que define la acción de borrado sobre una entidad
-        /// Autor: Asesoftware - Javier Gonzalez
+        /// Autor: Javier Gonzalez
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
@@ -45,7 +45,7 @@ namespace Inventario.Infrastructure.Repositories
         /// <summary>
         /// Fecha: 24 de Febrero de 2023
         /// Descripción: Método que define la acción de consulta de una entidad
-        /// Autor: Asesoftware - Javier Gonzalez
+        /// Autor: Javier Gonzalez
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -57,7 +57,7 @@ namespace Inventario.Infrastructure.Repositories
         /// <summary>
         /// Fecha: 24 de Febrero de 2023
         /// Descripción: Método que define la acción de consulta de un listado de entidades
-        /// Autor: Asesoftware - Javier Gonzalez
+        /// Autor: Javier Gonzalez
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -69,7 +69,7 @@ namespace Inventario.Infrastructure.Repositories
         /// <summary>
         /// Fecha: 24 de Febrero de 2023
         /// Descripción: Método que define la acción de actualización sobre una entidad
-        /// Autor: Asesoftware - Javier Gonzalez
+        /// Autor: Javier Gonzalez
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
@@ -82,7 +82,7 @@ namespace Inventario.Infrastructure.Repositories
         /// <summary>
         /// Fecha: 27/07/2023
         /// Descripción: Método para cargar entidades relacionadas segun el nombre de la propiedad
-        /// Autor: Asesoftware - Manuel Linares
+        /// Autor: Manuel Linares
         /// </summary>
         /// <param name="entidad"></param>
         /// <param name="propiedadRelacionada"></param>
@@ -97,7 +97,7 @@ namespace Inventario.Infrastructure.Repositories
         /// <summary>
         /// Fecha: 27/07/2023
         /// Descripción: Método para cargar entidades relacionadas segun una propiedad
-        /// Autor: Asesoftware - Manuel Linares
+        /// Autor: Manuel Linares
         /// </summary>
         /// <param name="entidad"></param>
         /// <param name="propiedadRelacionada"></param>
@@ -117,7 +117,7 @@ namespace Inventario.Infrastructure.Repositories
         /// <summary>
         /// Fecha: 27/07/2023
         /// Descripción: Método para cargar colecciones de entidades relacionadas segun el nombre de la propiedad
-        /// Autor: Asesoftware - Manuel Linares
+        /// Autor: Manuel Linares
         /// </summary>
         /// <param name="entidad"></param>
         /// <param name="propiedadRelacionada"></param>
@@ -132,7 +132,7 @@ namespace Inventario.Infrastructure.Repositories
         /// <summary>
         /// Fecha: 27/07/2023
         /// Descripción: Método para cargar colecciones de entidades relacionadas segun una propiedad
-        /// Autor: Asesoftware - Manuel Linares
+        /// Autor: Manuel Linares
         /// </summary>
         /// <param name="entidad"></param>
         /// <param name="propiedadRelacionada"></param>
