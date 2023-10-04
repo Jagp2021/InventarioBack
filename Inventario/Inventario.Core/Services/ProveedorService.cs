@@ -8,17 +8,15 @@ namespace Inventario.Core.Services
 {
     public class ProveedorService : BaseService, IProveedorService
     {
-        private readonly IMapper _mapper;
 
-        public ProveedorService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork)
+        public ProveedorService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
         {
-            _mapper = mapper;
         }
 
         public ProveedorDto DeleteProveedor(ProveedorDto proveedor)
         {
             var repository = UnitOfWork.ProveedorRepository();
-            repository.Update(_mapper.Map<Proveedor>(proveedor));
+            repository.Update(Mapper.Map<Proveedor>(proveedor));
             UnitOfWork.SaveChanges();
             return proveedor;
         }
@@ -26,29 +24,29 @@ namespace Inventario.Core.Services
         public ProveedorDto GetProveedor(ProveedorDto filtro)
         {
             var repository = UnitOfWork.ProveedorRepository();
-            return _mapper.Map<ProveedorDto>(repository.Get(e => e.Id == filtro.Id));
+            return Mapper.Map<ProveedorDto>(repository.Get(e => e.Id == filtro.Id));
         }
 
         public List<ProveedorDto> ListProveedores(ProveedorDto filtro)
         {
             var repository = UnitOfWork.ProveedorRepository();
-            return _mapper.Map<List<ProveedorDto>>(repository.List(e => e.Id == filtro.Id));
+            return Mapper.Map<List<ProveedorDto>>(repository.List(e => e.Id == filtro.Id));
         }
 
         public ProveedorDto SaveProveedor(ProveedorDto proveedor)
         {
             var repository = UnitOfWork.ProveedorRepository();
-            var result = repository.Add(_mapper.Map<Proveedor>(proveedor));
+            var result = repository.Add(Mapper.Map<Proveedor>(proveedor));
             UnitOfWork.SaveChanges();
-            return _mapper.Map<ProveedorDto>(result);
+            return Mapper.Map<ProveedorDto>(result);
         }
 
         public ProveedorDto UpdateProveedor(ProveedorDto proveedor)
         {
             var repository = UnitOfWork.ProveedorRepository();
-            var result = repository.Add(_mapper.Map<Proveedor>(proveedor));
+            var result = repository.Add(Mapper.Map<Proveedor>(proveedor));
             UnitOfWork.SaveChanges();
-            return _mapper.Map<ProveedorDto>(result);
+            return Mapper.Map<ProveedorDto>(result);
         }
     }
 }

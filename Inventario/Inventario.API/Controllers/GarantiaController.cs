@@ -1,43 +1,61 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿using Inventario.Core.Dtos.Custom;
+using Inventario.Core.Dtos;
+using Microsoft.AspNetCore.Mvc;
+using Inventario.Core.Interfaces.Service;
+using Inventario.Core.Utils;
 
 namespace Inventario.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GarantiaController : ControllerBase
+    public class GarantiaController : BaseController
     {
-        // GET: api/<GarantiaController>
+        private readonly IGarantiaService _garantiaService;
+        public GarantiaController(IGarantiaService garantiaService)
+        {
+            _garantiaService = garantiaService;
+        }
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ResponseDto ObtenerIngresos([FromQuery]GarantiaDetalleDto garantia)
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                response.Data = _garantiaService.ListGarantias(garantia);
+            }
+            catch (Exception ex)
+            {
+                ConstruirResponseError(ex);
+            }
+            return response;
         }
 
-        // GET api/<GarantiaController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
 
-        // POST api/<GarantiaController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ResponseDto CrearGarantia([FromBody] GarantiaDetalleDto garantia)
         {
+            try
+            {
+                response.Data = _garantiaService.SaveGarantia(garantia,Constants.General.ACCION_GUARDAR);
+            }
+            catch (Exception ex)
+            {
+                ConstruirResponseError(ex);
+            }
+            return response;
         }
 
-        // PUT api/<GarantiaController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public ResponseDto ActualizarGarantia([FromBody] GarantiaDetalleDto garantia)
         {
-        }
-
-        // DELETE api/<GarantiaController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            try
+            {
+                response.Data = _garantiaService.SaveGarantia(garantia,Constants.General.ACCION_ACTUALIZAR);
+            }
+            catch (Exception ex)
+            {
+                ConstruirResponseError(ex);
+            }
+            return response;
         }
     }
 }

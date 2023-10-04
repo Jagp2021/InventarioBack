@@ -17,6 +17,8 @@
             public const string MENSAJE_GENERICO = "Ocurrió un error realizando la transacción. Consulte con el administrador o intentelo nuevamente";
             public const string ALLOWED_HOST = "AllowedHosts";
             public const string CONTENT_TYPE = "";
+            public const string ACCION_GUARDAR = "Guardar";
+            public const string ACCION_ACTUALIZAR = "Actualizar";
         }
 
         /// <summary>
@@ -24,6 +26,23 @@
         /// </summary>
         public static class Dominio
         {
+            public const string DOMINIO_TIPO_DOCUMENTO = "TIPODOCUMENTO";
+            public const string DOMINIO_TIPO_PAGO = "TIPOPAGO";
+            public const string DOMINIO_ESTADO_GARANTIA = "ESTADOGARANTIA";
+            public const string DOMINIO_TIPO_PRODUCTO = "TIPOPRODUCTO";
+            public static class TipoDocumento
+            {
+                public const string CC = "CC";
+                public const string CE = "CE";
+                public const string NIT = "NIT";
+            }
+
+            public static class EstadoGarantia
+            {
+                public const string REGISTRADA = "REGI";
+                public const string GESTIONADA = "GEST";
+                public const string CERRADA = "CERR";
+            }
         }
 
         

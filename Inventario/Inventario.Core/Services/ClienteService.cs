@@ -8,16 +8,14 @@ namespace Inventario.Core.Services
 {
     public class ClienteService : BaseService, IClienteService
     {
-        private readonly IMapper _mapper;
-        public ClienteService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork)
+        public ClienteService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
         {
-            _mapper = mapper;
         }
 
         public ClienteDto DeleteCliente(ClienteDto cliente)
         {
             var repository = UnitOfWork.ClienteRepository();
-            repository.Update(_mapper.Map<Cliente>(cliente));
+            repository.Update(Mapper.Map<Cliente>(cliente));
             UnitOfWork.SaveChanges();
             return cliente;
         }
@@ -25,29 +23,29 @@ namespace Inventario.Core.Services
         public ClienteDto GetCliente(ClienteDto filtro)
         {
             var repository = UnitOfWork.ClienteRepository();
-            return _mapper.Map<ClienteDto>(repository.Get(e => e.Id == filtro.Id));           
+            return Mapper.Map<ClienteDto>(repository.Get(e => e.Id == filtro.Id));           
         }
 
         public List<ClienteDto> ListClientes(ClienteDto filtro)
         {
             var repository = UnitOfWork.ClienteRepository();
-            return _mapper.Map<List<ClienteDto>>(repository.List(e => e.Id == filtro.Id));
+            return Mapper.Map<List<ClienteDto>>(repository.List(e => e.Id == filtro.Id));
         }
 
         public ClienteDto SaveCliente(ClienteDto cliente)
         {
             var repository = UnitOfWork.ClienteRepository();
-            var result = repository.Add(_mapper.Map<Cliente>(cliente));
+            var result = repository.Add(Mapper.Map<Cliente>(cliente));
             UnitOfWork.SaveChanges();
-            return _mapper.Map<ClienteDto>(result);
+            return Mapper.Map<ClienteDto>(result);
         }
 
         public ClienteDto UpdateCliente(ClienteDto cliente)
         {
             var repository = UnitOfWork.ClienteRepository();
-            var result = repository.Update(_mapper.Map<Cliente>(cliente));
+            var result = repository.Update(Mapper.Map<Cliente>(cliente));
             UnitOfWork.SaveChanges();
-            return _mapper.Map<ClienteDto>(result);
+            return Mapper.Map<ClienteDto>(result);
         }
     }
 }

@@ -14,12 +14,14 @@
     {
         #region Atributos y Propiedades
         protected internal IUnitOfWork UnitOfWork { get; set; }
+        protected internal IMapper Mapper { get; set; }
         #endregion
 
         #region Constructor
-        public BaseService(IUnitOfWork unitOfWork)
+        public BaseService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             UnitOfWork = unitOfWork;
+            Mapper = mapper;
         }
         #endregion
 

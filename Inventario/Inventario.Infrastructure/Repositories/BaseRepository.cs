@@ -148,5 +148,23 @@ namespace Inventario.Infrastructure.Repositories
             var entry = _dbSet.Attach(entidad);
             entry.Collection(propiedadColeccion).Load();
         }
+
+        public List<TEntity> UpdateRange(List<TEntity> entities)
+        {
+            _dbSet.UpdateRange(entities);
+            return entities;
+        }
+
+        public List<TEntity> AddRange(List<TEntity> entities)
+        {
+            _dbSet.AddRange(entities);
+            return entities;
+        }
+
+        public List<TEntity> DeleteRange(List<TEntity> entities)
+        {
+            _dbSet.RemoveRange(entities);
+            return entities;
+        }
     }
 }

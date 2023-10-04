@@ -91,5 +91,8 @@ namespace Inventario.Core.Interfaces.Repository
         /// <param name="propiedadRelacionada"></param>
         /// <returns></returns>
         void LoadRelatedCollection(TEntity entidad, Expression<Func<TEntity, object>> propiedadRelacionada);
+        List<TEntity> AddRange(List<TEntity> entities);
+        List<TEntity> UpdateRange(List<TEntity> entities);
+        List<TEntity> DeleteRange(List<TEntity> entities);
     }
 }

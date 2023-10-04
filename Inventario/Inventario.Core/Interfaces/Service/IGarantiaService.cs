@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Inventario.Core.Dtos;
+using Inventario.Core.Dtos.Custom;
 
 namespace Inventario.Core.Interfaces.Service
 {
     public interface IGarantiaService
     {
+        List<GarantiaDetalleDto> ListGarantias(GarantiaDetalleDto filtro);
+        GarantiaDetalleDto SaveGarantia(GarantiaDetalleDto garantia, string accion);
     }
 }

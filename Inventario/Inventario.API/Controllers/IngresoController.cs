@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Inventario.Core.Dtos;
+using Inventario.Core.Dtos.Custom;
+using Inventario.Core.Interfaces.Service;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -6,38 +9,43 @@ namespace Inventario.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class IngresoController : ControllerBase
+    public class IngresoController : BaseController
     {
-        // GET: api/<IngresoController>
+        private readonly IIngresoService _ingresoService;
+        public IngresoController(IIngresoService ingresoService)
+        {
+            _ingresoService = ingresoService;
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ResponseDto ObtenerIngresos([FromQuery]IngresoDetalleDto ingreso)
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                response.Data = _ingresoService.ListIngresos(ingreso);
+            }
+            catch (Exception ex)
+            {
+                ConstruirResponseError(ex);
+            }
+            return response;
         }
 
-        // GET api/<IngresoController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<IngresoController>
+        
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ResponseDto CrearIngreso([FromBody] IngresoDetalleDto ingreso)
         {
+            try
+            {
+                response.Data = _ingresoService.SaveIngreso(ingreso);
+            }
+            catch (Exception ex)
+            {
+                ConstruirResponseError(ex);
+            }
+            return response;
         }
 
-        // PUT api/<IngresoController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<IngresoController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        
     }
 }

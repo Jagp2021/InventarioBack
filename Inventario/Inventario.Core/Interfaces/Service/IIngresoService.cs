@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Inventario.Core.Dtos;
+using Inventario.Core.Dtos.Custom;
 
 namespace Inventario.Core.Interfaces.Service
 {
     public interface IIngresoService
     {
+        List<IngresoDetalleDto> ListIngresos(IngresoDetalleDto filtro);
+        IngresoDetalleDto SaveIngreso(IngresoDetalleDto ingreso);
     }
 }

@@ -2,6 +2,10 @@
 {
     public class Venta : BaseEntity
     {
+        public Venta()
+        {
+            DetalleFactura = new HashSet<DetalleVenta>();
+        }
         public int Id { get; set; }
         public string NumeroFactura { get; set; } = null!;
         public DateTime Fecha { get; set; }
@@ -11,6 +15,6 @@
         public decimal Total { get; set; }
 
         public virtual Cliente ClienteNavigation { get; set; } = null!;
-        public virtual DetalleVenta? DetalleFactura { get; set; }
+        public virtual ICollection<DetalleVenta>? DetalleFactura { get; set; }
     }
 }

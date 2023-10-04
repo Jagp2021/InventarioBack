@@ -89,8 +89,8 @@ namespace Inventario.Infrastructure.Context
                     .HasColumnName("valor_unitario");
 
                 entity.HasOne(d => d.IdNavigation)
-                    .WithOne(p => p.DetalleFactura)
-                    .HasForeignKey<DetalleVenta>(d => d.Id)
+                    .WithMany(p => p.DetalleFactura)
+                    .HasForeignKey(d => d.IdFactura)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_detalle_factura_factura");
 
@@ -121,6 +121,8 @@ namespace Inventario.Infrastructure.Context
                 entity.Property(e => e.IdGarantia).HasColumnName("id_garantia");
 
                 entity.Property(e => e.IdProducto).HasColumnName("id_producto");
+                entity.Property(e => e.IdProveedor).HasColumnName("id_proveedor");
+                entity.Property(e => e.ValorProducto).HasColumnName("valor_producto");
 
                 entity.HasOne(d => d.IdGarantiaNavigation)
                     .WithMany(p => p.DetalleGarantia)

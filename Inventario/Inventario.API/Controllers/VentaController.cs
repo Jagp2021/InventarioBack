@@ -1,43 +1,48 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Inventario.Core.Dtos.Custom;
+using Inventario.Core.Dtos;
+using Microsoft.AspNetCore.Mvc;
+using Inventario.Core.Interfaces.Service;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Inventario.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class VentaController : ControllerBase
+    public class VentaController : BaseController
     {
-        // GET: api/<VentaController>
+        private readonly IVentaService _ventaService;
+        public VentaController(IVentaService ventaService)
+        {
+            _ventaService = ventaService;
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ResponseDto ObtenerVentas([FromQuery]VentaDetalleDto filtro)
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                response.Data = _ventaService.ListVentas(filtro);
+            }
+            catch (Exception ex)
+            {
+                ConstruirResponseError(ex);
+            }
+            return response;
         }
 
-        // GET api/<VentaController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
 
-        // POST api/<VentaController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ResponseDto GenerarVenta([FromBody] VentaDetalleDto venta)
         {
-        }
-
-        // PUT api/<VentaController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<VentaController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            try
+            {
+                response.Data = _ventaService.SaveVenta(venta);
+            }
+            catch (Exception ex)
+            {
+                ConstruirResponseError(ex);
+            }
+            return response;
         }
     }
 }
