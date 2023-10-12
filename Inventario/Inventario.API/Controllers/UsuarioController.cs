@@ -1,43 +1,82 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿using Inventario.Core.Dtos;
+using Inventario.Core.Interfaces.Service;
+using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Inventario.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsuarioController : ControllerBase
+    public class UsuarioController : BaseController
     {
-        // GET: api/<UsuarioController>
+        private readonly IUsuarioService _usuarioService;
+        public UsuarioController(IUsuarioService usuarioService)
+        {
+            _usuarioService = usuarioService;
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Route("ObtenerUsuarios")]
+        [SwaggerOperation(Summary = "Obtiene los usuarios", Description = "Obtiene los usuarios")]
+        public ResponseDto ObtenerUsuarios([FromQuery]UsuarioDto usuario)
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                response.Data = _usuarioService.ListUsuarios(usuario);
+            }
+            catch (Exception ex)
+            {
+                ConstruirResponseError(ex);
+            }
+            return response;
         }
 
-        // GET api/<UsuarioController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet]
+        [Route("ObtenerUsuario")]
+        [SwaggerOperation(Summary = "Obtiene el usuario", Description = "Obtiene el usuario")]
+        public ResponseDto ObtenerUsuario([FromQuery]UsuarioDto usuario)
         {
-            return "value";
+            try
+            {
+                response.Data = _usuarioService.GetUsuario(usuario);
+            }
+            catch (Exception ex)
+            {
+                ConstruirResponseError(ex);
+            }
+            return response;
         }
 
-        // POST api/<UsuarioController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("GuardarUsuario")]
+        [SwaggerOperation(Summary = "Guarda el usuario", Description = "Guarda el usuario")]
+        public ResponseDto GuardarUsuario([FromBody]UsuarioDto usuario)
         {
+            try
+            {
+                response.Data = _usuarioService.SaveUsuario(usuario);
+            }
+            catch (Exception ex)
+            {
+                ConstruirResponseError(ex);
+            }
+            return response;
         }
 
-        // PUT api/<UsuarioController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        [Route("ActualizarUsuario")]
+        [SwaggerOperation(Summary = "Actualiza el usuario", Description = "Actualiza el usuario")]
+        public ResponseDto ActualizarUsuario([FromBody]UsuarioDto usuario)
         {
-        }
-
-        // DELETE api/<UsuarioController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            try
+            {
+                response.Data = _usuarioService.UpdateUsuario(usuario);
+            }
+            catch (Exception ex)
+            {
+                ConstruirResponseError(ex);
+            }
+            return response;
         }
     }
 }

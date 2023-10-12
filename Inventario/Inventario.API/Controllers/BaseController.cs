@@ -13,7 +13,7 @@
     /// Controller Base
     /// </summary>
     [ApiController]
-    public class BaseController : Controller
+    public class BaseController : ControllerBase
     {
         #region Atributos y Propiedades
         protected ResponseDto response;

@@ -44,7 +44,7 @@ namespace Inventario.Core.Services
         public ProveedorDto UpdateProveedor(ProveedorDto proveedor)
         {
             var repository = UnitOfWork.ProveedorRepository();
-            var result = repository.Add(Mapper.Map<Proveedor>(proveedor));
+            var result = repository.Update(Mapper.Map<Proveedor>(proveedor));
             UnitOfWork.SaveChanges();
             return Mapper.Map<ProveedorDto>(result);
         }

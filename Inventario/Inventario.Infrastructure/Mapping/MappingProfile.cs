@@ -25,7 +25,10 @@ namespace Inventario.Infrastructure.Mapping
             #endregion
 
             #region Usuario
-
+            CreateMap<Usuario, UsuarioDto>();
+            CreateMap<UsuarioDto, Usuario>();
+            CreateMap<UsuarioDetalleDto, Usuario>();
+            CreateMap<Usuario, UsuarioDetalleDto>();
             #endregion
 
             #region Proveedor
@@ -69,6 +72,14 @@ namespace Inventario.Infrastructure.Mapping
                 .ForMember(dest => dest.DetalleFactura, opt => opt.MapFrom(src => src.DetalleFactura));
             CreateMap<DetalleVentaDto, Producto>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.IdProducto));
+            #endregion
+
+            #region Dominio
+
+            CreateMap<Dominio, DominioDto>();
+            CreateMap<DominioDto, Dominio>();
+            CreateMap<Perfil, PerfilDto>();
+            CreateMap<PerfilDto, Perfil>();
             #endregion
         }
     }

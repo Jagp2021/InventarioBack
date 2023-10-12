@@ -23,13 +23,13 @@ namespace Inventario.Core.Services
         public UsuarioDetalleDto GetUsuario(UsuarioDto filtro)
         {
             var repository = UnitOfWork.UsuarioRepository();
-            return Mapper.Map<UsuarioDetalleDto>(repository.Get(e => e.Id == filtro.Id));
+            return repository.List(filtro).FirstOrDefault()!;
         }
 
         public List<UsuarioDetalleDto> ListUsuarios(UsuarioDto filtro)
         {
             var repository = UnitOfWork.UsuarioRepository();
-            return Mapper.Map<List<UsuarioDetalleDto>>(repository.List(e => e.Id == filtro.Id));
+            return repository.List(filtro);
         }
 
         public UsuarioDto SaveUsuario(UsuarioDto usuario)

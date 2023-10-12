@@ -1,5 +1,8 @@
-﻿using Inventario.Core.Entities;
+﻿using Inventario.Core.Dtos;
+using Inventario.Core.Dtos.Custom;
+using Inventario.Core.Entities;
 using Inventario.Core.Interfaces.Repository;
+using Inventario.Core.Utils;
 using Inventario.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +14,23 @@ namespace Inventario.Infrastructure.Repositories
         public ProductoRepository(EFContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
+        }
+
+        public List<ProductoDetalleDto> List(ProductoDto filtro)
+        {
+            var result =  (from pr in _dbContext.Productos
+                    select new ProductoDetalleDto
+                    {
+                        CantidadDisponible = pr.CantidadDisponible,
+                        Descripcion = pr.Descripcion,
+                        Estado = pr.Estado,
+                        Id = pr.Id,
+                        Nombre = pr.Nombre,
+                        TipoProducto = pr.TipoProducto,
+                        DescripcionTipoProducto = _dbContext.Dominios.FirstOrDefault(e => e.Dominio1 == Constants.Dominio.DOMINIO_TIPO_PRODUCTO)!.Descripcion,
+                    }
+                    ).ToList();
+            return result;                                                                                                                                           
         }
 
         public List<Producto> ListProductosAsociados(List<Producto> filtro)

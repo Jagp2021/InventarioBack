@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Inventario.Core.Dtos;
+using Inventario.Core.Dtos.Custom;
 using Inventario.Core.Entities;
 using Inventario.Core.Interfaces.Repository;
 using Inventario.Core.Interfaces.Service;
@@ -22,23 +23,16 @@ namespace Inventario.Core.Services
             return producto;
         }
 
-        public ProductoDto GetProducto(ProductoDto filtro)
+        public ProductoDetalleDto GetProducto(ProductoDto filtro)
         {
             var repository = UnitOfWork.ProductoRepository();
-            return Mapper.Map<ProductoDto>(repository.Get(e => e.Id == filtro.Id));
+            return repository.List(filtro).FirstOrDefault()!;
         }
 
-        public List<ProductoDto> ListProductos(ProductoDto filtro)
+        public List<ProductoDetalleDto> ListProductos(ProductoDto filtro)
         {
             var repository = UnitOfWork.ProductoRepository();
-            return Mapper.Map<List<ProductoDto>>(repository.List(e => 
-            (filtro.Id == null || e.Id == filtro.Id) && 
-            (string.IsNullOrEmpty(filtro.TipoProducto) || e.TipoProducto == filtro.TipoProducto) &&
-            (string.IsNullOrEmpty(filtro.Nombre) || e.Nombre == filtro.Nombre) &&
-            (string.IsNullOrEmpty(filtro.Descripcion) || e.Descripcion == filtro.Descripcion) &&
-            (!filtro.Estado.HasValue || e.Estado == filtro.Estado)
-            
-            ));
+            return repository.List(filtro);
         }
 
         public ProductoDto SaveProducto(ProductoDto producto)

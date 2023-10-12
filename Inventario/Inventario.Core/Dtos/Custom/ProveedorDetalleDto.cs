@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Inventario.Core.Dtos.Custom
+﻿namespace Inventario.Core.Dtos.Custom
 {
-    internal class ProveedorDetalleDto
+    public class ProveedorDetalleDto : ProveedorDto
     {
+        public string? DescripcionTipoDocumento { get; set; }
     }
 }

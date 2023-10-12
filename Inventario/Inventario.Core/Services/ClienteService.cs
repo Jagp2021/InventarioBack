@@ -23,13 +23,27 @@ namespace Inventario.Core.Services
         public ClienteDto GetCliente(ClienteDto filtro)
         {
             var repository = UnitOfWork.ClienteRepository();
-            return Mapper.Map<ClienteDto>(repository.Get(e => e.Id == filtro.Id));           
+            return Mapper.Map<ClienteDto>(repository.Get(e => 
+            (e.Id == 0 || e.Id == filtro.Id) &&
+            (string.IsNullOrEmpty(filtro.Nombre) || e.Nombre == filtro.Nombre) &&
+            (string.IsNullOrEmpty(filtro.NumeroDocumento) || e.NumeroDocumento == filtro.NumeroDocumento) &&
+            (string.IsNullOrEmpty(filtro.TipoDocumento) || e.TipoDocumento == filtro.TipoDocumento) &&
+            (string.IsNullOrEmpty(filtro.Telefono) || e.Telefono == filtro.Telefono) &&
+            (string.IsNullOrEmpty(filtro.Email) || e.Email == filtro.Email)
+            ));           
         }
 
         public List<ClienteDto> ListClientes(ClienteDto filtro)
         {
             var repository = UnitOfWork.ClienteRepository();
-            return Mapper.Map<List<ClienteDto>>(repository.List(e => e.Id == filtro.Id));
+            return Mapper.Map<List<ClienteDto>>(repository.List(e =>
+            (e.Id == 0 || e.Id == filtro.Id) &&
+            (string.IsNullOrEmpty(filtro.Nombre) || e.Nombre == filtro.Nombre) &&
+            (string.IsNullOrEmpty(filtro.NumeroDocumento) || e.NumeroDocumento == filtro.NumeroDocumento) &&
+            (string.IsNullOrEmpty(filtro.TipoDocumento) || e.TipoDocumento == filtro.TipoDocumento) &&
+            (string.IsNullOrEmpty(filtro.Telefono) || e.Telefono == filtro.Telefono) &&
+            (string.IsNullOrEmpty(filtro.Email) || e.Email == filtro.Email)
+            ));
         }
 
         public ClienteDto SaveCliente(ClienteDto cliente)

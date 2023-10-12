@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Inventario.Core.Dtos.Custom
+﻿namespace Inventario.Core.Dtos.Custom
 {
-    internal class ProductoDetalleDto
+    public class ProductoDetalleDto : ProductoDto
     {
+        public string? DescripcionTipoProducto { get; set; }
     }
 }
