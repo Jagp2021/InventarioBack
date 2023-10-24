@@ -413,6 +413,9 @@ namespace Inventario.Infrastructure.Context
                     .IsUnicode(false)
                     .HasColumnName("username");
 
+                entity.Property(e => e.Password)
+                    .HasColumnName("password");
+
                 entity.HasOne(d => d.IdPerfilNavigation)
                     .WithMany(p => p.Usuarios)
                     .HasForeignKey(d => d.IdPerfil)

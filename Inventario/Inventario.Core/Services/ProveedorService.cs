@@ -24,13 +24,13 @@ namespace Inventario.Core.Services
         public ProveedorDto GetProveedor(ProveedorDto filtro)
         {
             var repository = UnitOfWork.ProveedorRepository();
-            return Mapper.Map<ProveedorDto>(repository.Get(e => e.Id == filtro.Id));
+            return Mapper.Map<ProveedorDto>(repository.List(filtro).FirstOrDefault()!);
         }
 
         public List<ProveedorDto> ListProveedores(ProveedorDto filtro)
         {
             var repository = UnitOfWork.ProveedorRepository();
-            return Mapper.Map<List<ProveedorDto>>(repository.List(e => e.Id == filtro.Id));
+            return Mapper.Map<List<ProveedorDto>>(repository.List(filtro));
         }
 
         public ProveedorDto SaveProveedor(ProveedorDto proveedor)

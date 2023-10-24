@@ -10,6 +10,7 @@
         public string? Telefono { get; set; }
         public string? Email { get; set; }
         public int IdPerfil { get; set; }
+        public string Password { get; set; } = null!;
 
         public virtual Perfil IdPerfilNavigation { get; set; } = null!;
     }
