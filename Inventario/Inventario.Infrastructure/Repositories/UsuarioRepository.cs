@@ -30,7 +30,7 @@ namespace Inventario.Infrastructure.Repositories
                     {
                         Id = u.Id,
                         Username = u.Username,
-                        //Password = u.Password,
+                        Password = u.Password,
                         IdPerfil = u.IdPerfil,
                         DescripcionPerfil = p.Nombre,
                         Email = u.Email,

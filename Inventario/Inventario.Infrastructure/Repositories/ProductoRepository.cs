@@ -21,6 +21,7 @@ namespace Inventario.Infrastructure.Repositories
             var result =  (from pr in _dbContext.Productos
                     select new ProductoDetalleDto
                     {
+                        Codigo = pr.Codigo,
                         CantidadDisponible = pr.CantidadDisponible,
                         Descripcion = pr.Descripcion,
                         Estado = pr.Estado,
