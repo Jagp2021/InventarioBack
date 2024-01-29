@@ -6,6 +6,7 @@
         public string? IdentificacionUsuario { get; set; }
         public string? NombreUsuario { get; set; }
         public string? UsernameUsuario { get; set; }
+        public string? DescripcionTipoPago { get; set; }
         public List<DetalleVentaDto>? DetalleFactura { get; set; }
         public DateTime? FechaInicio { get; set; }
         public DateTime? FechaFin { get; set; }

@@ -71,7 +71,6 @@ namespace Inventario.Infrastructure.Context
                 entity.HasIndex(e => e.IdProducto, "IXFK_detalle_factura_producto");
 
                 entity.Property(e => e.Id)
-                    .ValueGeneratedOnAdd()
                     .HasColumnName("id");
 
                 entity.Property(e => e.Cantidad).HasColumnName("cantidad");

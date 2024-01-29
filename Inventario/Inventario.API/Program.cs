@@ -3,6 +3,7 @@ using Inventario.API.Extensions;
 using Inventario.Core.Utils;
 using Inventario.Infrastructure.Mapping;
 using Serilog;
+using Serilog.Sinks.MSSqlServer;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,7 +23,10 @@ builder.Services.AddControllersWithViews().AddNewtonsoftJson(options =>
 );
 builder.Host.UseSerilog().UseServiceProviderFactory(new AutofacServiceProviderFactory())
                 .UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration
-                    .ReadFrom.Configuration(hostingContext.Configuration));
+                    .ReadFrom.Configuration(hostingContext.Configuration).WriteTo.MSSqlServer(
+                    connectionString: builder.Configuration.GetConnectionString(Constants.General.CONNECTION_STRING_DATABASE_NAME),
+                    sinkOptions: new MSSqlServerSinkOptions { TableName = "logs_excepcion", AutoCreateSqlTable = true },
+                    restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Error)) ;
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy", policy =>

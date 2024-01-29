@@ -21,9 +21,10 @@ namespace Inventario.Infrastructure.Repositories
                     join c in _dbContext.Clientes on v.Cliente equals c.Id
                     where (filtro.Id == 0 || v.Id == filtro.Id) &&
                           (filtro.Cliente == 0 || v.Cliente == filtro.Cliente) &&
-                          (filtro.Fecha == null || (v.Fecha >= filtro.FechaInicio && v.Fecha <= filtro.FechaFin)) &&
+                          (filtro.FechaInicio == null || (v.Fecha >= filtro.FechaInicio && v.Fecha <= filtro.FechaFin)) &&
                           (filtro.UsuarioRegistro == 0 || v.UsuarioRegistro == filtro.UsuarioRegistro) &&
-                          (filtro.IdentificacionUsuario == null || c.NumeroDocumento == filtro.IdentificacionUsuario)
+                          (filtro.IdentificacionUsuario == null || c.NumeroDocumento == filtro.IdentificacionUsuario) &&
+                          (filtro.TipoPago == null || v.TipoPago == filtro.TipoPago)
                     select new VentaDetalleDto
                     {
                         Id = v.Id,
@@ -33,6 +34,10 @@ namespace Inventario.Infrastructure.Repositories
                         IdentificacionUsuario = string.Format("{0} {1}", c.TipoDocumento, c.NumeroDocumento),
                         UsuarioRegistro = v.UsuarioRegistro,
                         NombreUsuario = _dbContext.Usuarios.FirstOrDefault(e => e.Id == v.UsuarioRegistro)!.Username,
+                        Total = v.Total,
+                        TipoPago = v.TipoPago,
+                        NumeroFactura = v.NumeroFactura,
+                        DescripcionTipoPago = _dbContext.Dominios.FirstOrDefault(e => e.Dominio1 =="TIPOPAGO" && e.Sigla == v.TipoPago)!.Descripcion,
                         DetalleFactura = (from d in _dbContext.DetalleFacturas
                                           join p in _dbContext.Productos on d.IdProducto equals p.Id
                                           where d.IdFactura == v.Id

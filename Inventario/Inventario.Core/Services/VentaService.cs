@@ -4,6 +4,7 @@ using Inventario.Core.Dtos.Custom;
 using Inventario.Core.Entities;
 using Inventario.Core.Interfaces.Repository;
 using Inventario.Core.Interfaces.Service;
+using System.Runtime.InteropServices;
 
 namespace Inventario.Core.Services
 {
@@ -26,10 +27,11 @@ namespace Inventario.Core.Services
             var productos = productoRepository.ListProductosAsociados(Mapper.Map<List<Producto>>(venta.DetalleFactura));
             if (ValidarStockProductos(productos, venta).Count > 0)
             {
-                throw new Exception("No hay stock suficiente para realizar la venta");
+                throw new ExternalException("No hay stock suficiente para realizar la venta");
             }
             productoRepository.UpdateRange(DescontarStock(productos, venta));
-            var result = repository.Add(Mapper.Map<Venta>(venta));
+            var ventaBD = Mapper.Map<Venta>(venta);
+            var result = repository.Add(ventaBD);
             UnitOfWork.SaveChanges();
             return Mapper.Map<VentaDto>(result);
         }

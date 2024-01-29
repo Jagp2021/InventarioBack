@@ -39,7 +39,14 @@
         #region Métodos y Funciones
         protected void ConstruirResponseError(Exception ex, bool incluirInnerException = false)
         {
-            Serilog.Log.Error(ex, ex.Message);
+            if (ex.GetType() != typeof(ExternalException))
+            {
+                Serilog.Log.Error(ex, ex.Message);
+            }
+            else
+            {
+                responseError.Codigo = HttpStatusCode.BadRequest.GetHashCode();
+            }
             responseError.Mensaje = typeof(ExternalException) != ex.GetType() ? Core.Utils.Constants.General.MENSAJE_GENERICO : ex.Message;
             if (incluirInnerException && ex.InnerException != null)
                 responseError.Data = ex.InnerException.Message;

@@ -22,17 +22,16 @@ namespace Inventario.Core.Services
 
         public GarantiaDetalleDto SaveGarantia(GarantiaDetalleDto garantia, string accion)
         {
-            var result = new Garantia();
             var repository = UnitOfWork.GarantiaRepository();
             var productoRepository = UnitOfWork.ProductoRepository();
             var productos = productoRepository.ListProductosAsociados(Mapper.Map<List<Producto>>(garantia.DetalleGarantia));
             if (accion == Constants.General.ACCION_GUARDAR)
             {
-                result = repository.Add(Mapper.Map<Garantia>(garantia));
+                repository.Add(Mapper.Map<Garantia>(garantia));
             }
             else
             {
-                result = repository.Update(Mapper.Map<Garantia>(garantia));
+                repository.Update(Mapper.Map<Garantia>(garantia));
             }
 
             if (garantia.EstadoGarantia == Constants.Dominio.EstadoGarantia.GESTIONADA)
