@@ -2,7 +2,7 @@
 using Inventario.Core.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Inventario.Core.Interfaces.Service;
-
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Inventario.API.Controllers
 {
@@ -37,6 +37,22 @@ namespace Inventario.API.Controllers
             try
             {
                 response.Data = _ventaService.SaveVenta(venta);
+            }
+            catch (Exception ex)
+            {
+                ConstruirResponseError(ex);
+            }
+            return response;
+        }
+
+        [Route("GenerarConsecutivo")]
+        [SwaggerOperation(Summary = "Generar consecutivo de venta", Description = "Generar consecutivo de venta")]
+        [HttpGet]
+        public ResponseDto GenerarConsecutivo()
+        {
+            try
+            {
+                response.Data = _ventaService.GenerarConsecutivo();
             }
             catch (Exception ex)
             {

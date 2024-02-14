@@ -60,5 +60,12 @@ namespace Inventario.Core.Services
                         TipoProducto = p.TipoProducto
                     }).ToList();
         }
+
+        public string GenerarConsecutivo()
+        {
+            var anio = DateTime.Now.Year.ToString();
+            var consecutivo = UnitOfWork.VentaRepository().List(e => e.NumeroFactura.Contains(anio)).Count + 1;
+            return $"{anio}-{consecutivo:D4}";
+        }
     }
 }

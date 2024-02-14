@@ -63,6 +63,7 @@
             services.AddTransient<IUsuarioService, UsuarioService>();
             services.AddTransient<IVentaService, VentaService>();
             services.AddTransient<IDominioService, DominioService>();
+            services.AddTransient<IPermisosService, PermisosService>();
 
             return services;
         }

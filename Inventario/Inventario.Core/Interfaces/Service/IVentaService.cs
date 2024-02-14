@@ -7,5 +7,6 @@ namespace Inventario.Core.Interfaces.Service
     {
         List<VentaDetalleDto> ListVentas(VentaDetalleDto filtro);
         VentaDto SaveVenta(VentaDetalleDto venta);
+        string GenerarConsecutivo();
     }
 }

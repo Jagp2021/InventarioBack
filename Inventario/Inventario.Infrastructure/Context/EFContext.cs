@@ -19,6 +19,8 @@ namespace Inventario.Infrastructure.Context
         public virtual DbSet<Producto> Productos { get; set; } = null!;
         public virtual DbSet<Proveedor> Proveedors { get; set; } = null!;
         public virtual DbSet<Usuario> Usuarios { get; set; } = null!;
+        public virtual DbSet<Menu> Menus { get; set; } = null!;
+        public virtual DbSet<PermisosPerfil> PermisosPerfiles { get; set; } = null!;
 
         public EFContext(DbContextOptions options) : base(options)
         {
@@ -420,6 +422,43 @@ namespace Inventario.Infrastructure.Context
                     .HasForeignKey(d => d.IdPerfil)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_usuario_perfil");
+            });
+
+            modelBuilder.Entity<Menu>(entity =>
+            {
+                entity.ToTable("menu");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Icono)
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("icono");
+                entity.Property(e => e.IdMenuPadre).HasColumnName("id_menu_padre");
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("nombre");
+                entity.Property(e => e.Url)
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("url");
+
+                entity.HasOne(d => d.IdMenuPadreNavigation).WithMany(p => p.InverseIdMenuPadreNavigation)
+                    .HasForeignKey(d => d.IdMenuPadre)
+                    .HasConstraintName("FK_menu_menu");
+            });
+
+            modelBuilder.Entity<PermisosPerfil>(entity =>
+            {
+                entity.ToTable("permisos_perfil");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.IdMenu).HasColumnName("id_menu");
+                entity.Property(e => e.IdPerfil).HasColumnName("id_perfil");
+
+                entity.HasOne(d => d.IdMenuNavigation).WithMany(p => p.PermisosPerfils)
+                    .HasForeignKey(d => d.IdMenu)
+                    .HasConstraintName("FK_permisos_perfil_menu");
             });
         }
     }
