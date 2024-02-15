@@ -21,7 +21,8 @@ namespace Inventario.Core.Services
             {
                 IdUsuario = usuarioActual.Id,
                 NombreUsuario = usuarioActual.Nombre,
-                RolUsuario = perfil.Nombre
+                RolUsuario = perfil.Nombre,
+                Usuario = usuarioActual.Username
             };
         }
 

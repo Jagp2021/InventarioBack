@@ -3,6 +3,7 @@
     public class SesionDto
     {
         public int? IdUsuario { get; set; }
+        public string? Usuario { get; set; }
         public string? NombreUsuario { get; set; }
         public string? RolUsuario { get; set; }
     }
