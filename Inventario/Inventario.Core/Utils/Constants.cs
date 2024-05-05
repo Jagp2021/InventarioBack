@@ -30,6 +30,7 @@
             public const string DOMINIO_TIPO_PAGO = "TIPOPAGO";
             public const string DOMINIO_ESTADO_GARANTIA = "ESTADOGARANTIA";
             public const string DOMINIO_TIPO_PRODUCTO = "TIPOPRODUCTO";
+            public const string DOMINIO_TIPO_GARANTIA = "TIPOGARANTIA";
             public static class TipoDocumento
             {
                 public const string CC = "CC";

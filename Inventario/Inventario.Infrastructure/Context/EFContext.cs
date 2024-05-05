@@ -272,6 +272,24 @@ namespace Inventario.Infrastructure.Context
                     .HasColumnName("fecha");
 
                 entity.Property(e => e.IdFactura).HasColumnName("id_factura");
+                entity.Property(e => e.IdIngreso).HasColumnName("id_ingreso");
+
+                entity.Property(e => e.TipoGarantia)
+                    .HasMaxLength(4)
+                    .IsUnicode(false)
+                    .HasColumnName("tipo_garantia");
+
+                entity.HasOne(d => d.IdFacturaNavigation)
+                    .WithMany(p => p.GarantiaNavigation)
+                    .HasForeignKey(d => d.IdFactura)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_garantia_factura");
+
+                entity.HasOne(d => d.IdIngresoNavigation)
+                    .WithMany(p => p.GarantiaNavigation)
+                    .HasForeignKey(d => d.IdIngreso)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_garantia_ingreso");
             });
 
             modelBuilder.Entity<Ingreso>(entity =>

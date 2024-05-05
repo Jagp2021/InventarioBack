@@ -5,6 +5,7 @@
         public Venta()
         {
             DetalleFactura = new HashSet<DetalleVenta>();
+            GarantiaNavigation = new HashSet<Garantia>();
         }
         public int Id { get; set; }
         public string NumeroFactura { get; set; } = null!;
@@ -15,6 +16,7 @@
         public decimal Total { get; set; }
 
         public virtual Cliente ClienteNavigation { get; set; } = null!;
+        public virtual ICollection<Garantia> GarantiaNavigation  { get; set; }
         public virtual ICollection<DetalleVenta>? DetalleFactura { get; set; }
     }
 }
