@@ -24,7 +24,8 @@ namespace Inventario.Infrastructure.Repositories
                           (filtro.FechaInicio == null || (v.Fecha >= filtro.FechaInicio && v.Fecha <= filtro.FechaFin)) &&
                           (filtro.UsuarioRegistro == 0 || v.UsuarioRegistro == filtro.UsuarioRegistro) &&
                           (filtro.IdentificacionUsuario == null || c.NumeroDocumento == filtro.IdentificacionUsuario) &&
-                          (filtro.TipoPago == null || v.TipoPago == filtro.TipoPago)
+                          (filtro.TipoPago == null || v.TipoPago == filtro.TipoPago) &&
+                          (!filtro.GarantiaAsociada) || (filtro.GarantiaAsociada && !_dbContext.Garantia.Any(e => e.IdFactura == v.Id))
                     select new VentaDetalleDto
                     {
                         Id = v.Id,

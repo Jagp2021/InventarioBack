@@ -34,15 +34,32 @@ namespace Inventario.Core.Services
                 repository.Update(Mapper.Map<Garantia>(garantia));
             }
 
-            if (garantia.EstadoGarantia == Constants.Dominio.EstadoGarantia.GESTIONADA)
+            switch (garantia.TipoGarantia)
             {
-                productoRepository.UpdateRange(ActualizarInventario(productos, garantia.DetalleGarantia!));
+                case Constants.Dominio.TipoGarantia.VENTA:
+                    if (garantia.EstadoGarantia == Constants.Dominio.EstadoGarantia.GESTIONADA)
+                    {
+                        productoRepository.UpdateRange(ActualizarInventario(productos, garantia.DetalleGarantia!, true));
+                    }
+                    break;
+                case Constants.Dominio.TipoGarantia.INGRESO:
+                    if (garantia.EstadoGarantia == Constants.Dominio.EstadoGarantia.REGISTRADA)
+                    {
+                        productoRepository.UpdateRange(ActualizarInventario(productos, garantia.DetalleGarantia!, false));
+                    }
+                    if (garantia.EstadoGarantia == Constants.Dominio.EstadoGarantia.GESTIONADA)
+                    {
+                        productoRepository.UpdateRange(ActualizarInventario(productos, garantia.DetalleGarantia!, true));
+                    }
+
+                    break;
             }
+
             UnitOfWork.SaveChanges();
             return Mapper.Map<GarantiaDetalleDto>(garantia);
         }
 
-        private static List<Producto> ActualizarInventario(List<Producto> productos, List<DetalleGarantiaDto> detalleGarantia)
+        private static List<Producto> ActualizarInventario(List<Producto> productos, List<DetalleGarantiaDto> detalleGarantia, bool sumar)
         {
             return (from p in productos
                     join d in detalleGarantia on p.Id equals d.IdProducto
@@ -53,7 +70,7 @@ namespace Inventario.Core.Services
                         Descripcion = p.Descripcion,
                         TipoProducto = p.TipoProducto,
                         Estado = p.Estado,
-                        CantidadDisponible = p.CantidadDisponible + d.Cantidad,
+                        CantidadDisponible = sumar ? p.CantidadDisponible + d.Cantidad : p.CantidadDisponible - d.Cantidad,
                         Codigo = p.Codigo
                     }).ToList();
         }

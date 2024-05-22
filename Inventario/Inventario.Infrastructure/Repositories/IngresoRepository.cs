@@ -23,7 +23,8 @@ namespace Inventario.Infrastructure.Repositories
                             where (filtro.Id == 0 || i.Id == filtro.Id) &&
                                   (filtro.IdProveedor == 0 || i.IdProveedor == filtro.IdProveedor) &&
                                   (filtro.FechaInicio == null || (i.Fecha >= filtro.FechaInicio && i.Fecha <= filtro.FechaFin)) &&
-                                  (filtro.IdProducto == 0 || d.IdProducto == filtro.IdProducto)
+                                  (filtro.IdProducto == 0 || d.IdProducto == filtro.IdProducto) &&
+                                  (!filtro.GarantiaAsociada) || (filtro.GarantiaAsociada && !_dbContext.Garantia.Any(e => e.IdIngreso == i.Id))
                             group new { i, p } by new { i.Id} into g
                             select new IngresoDetalleDto
                             {

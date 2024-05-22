@@ -8,5 +8,6 @@
         public DateTime? FechaInicio { get; set; }
         public DateTime? FechaFin { get; set; }
         public int IdProducto { get; set; }
+        public bool GarantiaAsociada { get; set; } = false;
     }
 }

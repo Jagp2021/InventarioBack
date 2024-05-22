@@ -10,5 +10,6 @@
         public List<DetalleVentaDto>? DetalleFactura { get; set; }
         public DateTime? FechaInicio { get; set; }
         public DateTime? FechaFin { get; set; }
+        public bool GarantiaAsociada { get; set; } = false;
     }
 }

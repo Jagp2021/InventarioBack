@@ -31,6 +31,7 @@
             public const string DOMINIO_ESTADO_GARANTIA = "ESTADOGARANTIA";
             public const string DOMINIO_TIPO_PRODUCTO = "TIPOPRODUCTO";
             public const string DOMINIO_TIPO_GARANTIA = "TIPOGARANTIA";
+
             public static class TipoDocumento
             {
                 public const string CC = "CC";
@@ -43,6 +44,12 @@
                 public const string REGISTRADA = "REGI";
                 public const string GESTIONADA = "GEST";
                 public const string CERRADA = "CERR";
+            }
+
+            public static class TipoGarantia
+            {
+                public const string VENTA = "VENT";
+                public const string INGRESO = "INGR";
             }
         }
 
