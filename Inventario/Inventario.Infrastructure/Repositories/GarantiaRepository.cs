@@ -41,6 +41,7 @@ namespace Inventario.Infrastructure.Repositories
                         IdCliente = factura.Cliente,
                         IdProveedor = ingreso.IdProveedor,
                         IdFactura = g.IdFactura?? 0,
+                        IdIngreso = g.IdIngreso?? 0,
                         DescripcionEstado = _dbContext.Dominios.FirstOrDefault(x =>
                                              x.Dominio1 == Constants.Dominio.DOMINIO_ESTADO_GARANTIA
                                                             && x.Sigla == g.EstadoGarantia)!.Descripcion,
@@ -60,6 +61,7 @@ namespace Inventario.Infrastructure.Repositories
                                                Id = dg.Id,
                                                IdGarantia = dg.IdGarantia,
                                                IdProducto = dg.IdProducto,
+                                               ValorProducto = dg.ValorProducto,
                                                EstadoProductoGarantia = dg.EstadoProductoGarantia,
                                                NombreProducto = _dbContext.Productos.FirstOrDefault(x => x.Id == dg.IdProducto)!.Nombre,
                                                NombreProveedor = !dg.IdProveedor.HasValue ? "" :
